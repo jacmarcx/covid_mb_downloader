@@ -24,7 +24,7 @@ commit = 'Nightly update: ' + str(t.date())
 def dl_file(url, path, file, ext='.json'):
     """save JSONs to Github daily"""
     req = requests.get(url)   
-    stamp = (str(datetime.now(pytz.timezone('America/Winnipeg')).now()) + '-') # get file timestamp
+    stamp = (str(datetime.now(pytz.timezone('America/Winnipeg')).date()) + '-') # get file timestamp
     ## save to json
     tmpdir = tempfile.TemporaryDirectory()
     fpath = os.path.join(tmpdir.name, file+ext)

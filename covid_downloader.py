@@ -38,7 +38,7 @@ def dl_file(url, path, file, ext='.json'):
             repo.create_file(path+stamp+file+ext, commit, data)
 
 
-While True:
+while True:
 
     # MB - Cases by demographics and RHA
     dl_file('https://services.arcgis.com/mMUesHYPkXjaFGfS/arcgis/rest/services/mb_covid_cases_by_demographics_rha_all/FeatureServer/0/query?f=json&where=1%3D1&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&groupByFieldsForStatistics=Age_Group%2CGender&orderByFields=Age_Group%20desc',

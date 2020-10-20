@@ -60,4 +60,5 @@ while True:
             'json/details-district/',
             'details-district')
             
-    time.sleep(15000)
+    time.sleep(86400) #24 hours
+    

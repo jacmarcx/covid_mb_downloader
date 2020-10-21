@@ -3,6 +3,6 @@ This app runs on Heroku and simply gathers up the Government of Manitoba dashboa
 
 Note that a JSONs for October 4th and October 10th are missing due to an error a while back.
 
-Couldn't figure out how to get Heroku's scheduler to work without payment and so.... this runs on a 24-hour while loop. I'll address this when/if it the script breaks.
+Couldn't figure out how to get Heroku's scheduler to work without payment and so.... this runs on a 24-hour while loop. I'll address this when/if the script breaks.
 ¯\\_(ツ)_/¯
 

@@ -30,10 +30,8 @@ def dl_file(url, path, file, ext='.json'):
     fpath = os.path.join(tmpdir.name, file+ext)
     with open(fpath, 'wb') as writer:
         writer.write(req.content)
-        
         with open(fpath, 'r') as reader:
             data = reader.read()
-        
             ## commit and push to repo
             repo.create_file(path+stamp+file+ext, commit, data)
 

@@ -6,6 +6,7 @@ import requests
 import tempfile
 from datetime import datetime, timedelta
 import json
+import pytz
 
 # access Github repo
 token = os.environ['GH_TOKEN']
@@ -22,7 +23,7 @@ def dl_file(url, path, file, ext='.json'):
     ## get dash board timestamp
     dashboard_date_url = "https://services.arcgis.com/mMUesHYPkXjaFGfS/arcgis/rest/services/mb_covid_cases_summary_stats_geography/FeatureServer/0/query?f=json&where=RHA%3D%27All%27&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&outSR=102100&resultOffset=0&resultRecordCount=1&resultType=standard&cacheHint=true"
     r = requests.get(dashboard_date_url)
-    stamp = pd.to_datetime(json.loads(r.content)['features'][0]['attributes']['Last_Update']).strftime('%Y-%m-%d')
+    stamp = datetime.fromtimestamp(json.loads(r.content)['features'][0]['attributes']['Date']/1000).strftime('%Y-%m-%d')
     ## save file
     tmpdir = tempfile.TemporaryDirectory()
     fpath = os.path.join(tmpdir.name, file+ext)
@@ -31,7 +32,7 @@ def dl_file(url, path, file, ext='.json'):
         with open(fpath, 'r') as reader:
             data = reader.read()
             ## commit and push to repo
-            repo.create_file(path+stamp+file+ext, commit, data)
+            repo.create_file(path+stamp+'-'+file+ext, commit, data)
 
 # MB - Cases by demographics and RHA
 dl_file('https://services.arcgis.com/mMUesHYPkXjaFGfS/arcgis/rest/services/mb_covid_cases_by_demographics_rha_all/FeatureServer/0/query?f=json&where=1%3D1&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&groupByFieldsForStatistics=Age_Group%2CGender&orderByFields=Age_Group%20desc',
